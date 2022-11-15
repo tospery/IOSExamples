@@ -34,9 +34,18 @@ final class AppDependency: HiIOS.AppDependency {
         window?.backgroundColor = .white
         self.window = window
 
-        let reactor = TabBarReactor(self.provider, nil)
-        let controller = TabBarController(self.navigator, reactor)
-        self.window.rootViewController = controller
+        let title = UIApplication.shared.name
+        var models = [Case].init()
+        if let json = FileManager.default.json(withFilename: "Home.json") as? [[String: Any]] {
+            models = [Case].init(JSONArray: json)
+        }
+        let viewReactor = HomeViewReactor(self.provider, [
+            Parameter.title: title,
+            Parameter.models: models
+        ])
+        let viewController = HomeViewController(self.navigator, viewReactor)
+        let navigationController = NavigationController.init(rootViewController: viewController)
+        self.window.rootViewController = navigationController
         self.window.makeKeyAndVisible()
     }
     

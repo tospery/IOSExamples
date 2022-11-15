@@ -17,7 +17,7 @@ import HiIOS
 extension Router: RouterCompatible {
     
     public func isLogined() -> Bool {
-        User.current?.isValid ?? false
+        false
     }
     
     public func isLegalHost(host: Host) -> Bool {

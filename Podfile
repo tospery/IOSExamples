@@ -7,7 +7,7 @@ inhibit_all_warnings!
 target 'IOSExamples' do
 
   # pod 'HiIOS', :path => '../HiIOS'
-  pod 'HiIOS', '1.0.1'
+  pod 'HiIOS', '1.0.2'
 
   # Base
   pod 'RxOptional', '5.0.2'

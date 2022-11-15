@@ -28,13 +28,13 @@ let networking = Networking(
 
 extension HiIOS.ProviderType {
     
-    // MARK: - SwiftPTAPI
-    /// SwiftPT网站信息：https://api.swiftpt.com/api/site/info.json
-    func siteInfo() -> Single<SiteInfo> {
-        networking.requestObject(
-            MultiTarget.init(SwiftPTAPI.siteInfo),
-            type: SiteInfo.self
-        )
-    }
+//    // MARK: - SwiftPTAPI
+//    /// SwiftPT网站信息：https://api.swiftpt.com/api/site/info.json
+//    func siteInfo() -> Single<SiteInfo> {
+//        networking.requestObject(
+//            MultiTarget.init(SwiftPTAPI.siteInfo),
+//            type: SiteInfo.self
+//        )
+//    }
     
 }
