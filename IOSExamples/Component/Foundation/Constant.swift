@@ -18,10 +18,3 @@ let envParameters: [String: Any] = [
     Parameter.appVersion: UIApplication.shared.version!,
     Parameter.appChannel: UIApplication.shared.channel
 ]
-
-//var userParameters: [String: Any] {
-//    [
-//        Parameter.userid: User.current?.id ?? "",
-//        Parameter.username: User.current?.username ?? ""
-//    ]
-//}

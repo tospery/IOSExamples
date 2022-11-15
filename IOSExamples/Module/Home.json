@@ -1,29 +1,12 @@
 [
     {
-        "name":"框架",
-        "forward":"Frame",
+        "name":"test",
+        "forward":"test",
         "parameters":null
     },
     {
-        "name":"测试",
-        "forward":"Test",
-        "parameters":null
-    },
-    {
-        "name":"语法",
-        "forward":"Syntax",
-        "parameters":null
-    },
-    {
-        "name":"Web",
-        "forward":"Web",
-        "parameters":null
-    },
-    {
-        "name":"界面",
-        "forward":"Quote",
+        "name":"跳转到微博（已安装跳app；未安装跳web）",
+        "forward":"openWeibo",
         "parameters":null
     }
 ]
- 
-
