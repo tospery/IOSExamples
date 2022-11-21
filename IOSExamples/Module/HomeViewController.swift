@@ -23,4 +23,9 @@ class HomeViewController: CaseViewController {
         }
     }
     
+    @objc func openAppStoreComment(_ parameters: [String: Any]?) {
+        let url = "itms-apps://itunes.apple.com/app/id414478124?action=write-review".url!
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
 }

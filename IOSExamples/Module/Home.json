@@ -8,5 +8,10 @@
         "name":"跳转到微博（已安装跳app；未安装跳web）",
         "forward":"openWeibo",
         "parameters":null
+    },
+    {
+        "name":"跳转到App Store评论",
+        "forward":"openAppStoreComment",
+        "parameters":null
     }
 ]
