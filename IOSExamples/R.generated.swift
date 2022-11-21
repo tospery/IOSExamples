@@ -164,7 +164,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 8 images.
+  /// This `R.image` struct is generated, and contains static references to 9 images.
   struct image {
     /// Image `AppLogo`.
     static let appLogo = Rswift.ImageResource(bundle: R.hostingBundle, name: "AppLogo")
@@ -174,6 +174,8 @@ struct R: Rswift.Validatable {
     static let appSlogan = Rswift.ImageResource(bundle: R.hostingBundle, name: "AppSlogan")
     /// Image `default_avatar`.
     static let default_avatar = Rswift.ImageResource(bundle: R.hostingBundle, name: "default_avatar")
+    /// Image `share_bg`.
+    static let share_bg = Rswift.ImageResource(bundle: R.hostingBundle, name: "share_bg")
     /// Image `tabbar_dashboard_normal`.
     static let tabbar_dashboard_normal = Rswift.ImageResource(bundle: R.hostingBundle, name: "tabbar_dashboard_normal")
     /// Image `tabbar_dashboard_selected`.
@@ -208,6 +210,13 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "default_avatar", bundle: ..., traitCollection: ...)`
     static func default_avatar(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.default_avatar, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "share_bg", bundle: ..., traitCollection: ...)`
+    static func share_bg(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.share_bg, compatibleWith: traitCollection)
     }
     #endif
 

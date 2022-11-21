@@ -13,5 +13,10 @@
         "name":"跳转到App Store评论",
         "forward":"openAppStoreComment",
         "parameters":null
+    },
+    {
+        "name":"原生分享功能",
+        "forward":"shareNative",
+        "parameters":null
     }
 ]

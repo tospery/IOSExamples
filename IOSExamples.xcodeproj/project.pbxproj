@@ -55,6 +55,7 @@
 		8CF21CC2292384580005FE4E /* Home.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CF21CC1292384580005FE4E /* Home.json */; };
 		8CF21CC4292384720005FE4E /* HomeViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF21CC3292384710005FE4E /* HomeViewReactor.swift */; };
 		8CF21CC62923847F0005FE4E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF21CC52923847F0005FE4E /* HomeViewController.swift */; };
+		915251EF292B492800A9C608 /* HomeViewController+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915251EE292B492800A9C608 /* HomeViewController+Share.swift */; };
 		91C267EC28EB326C00DD5677 /* Simple+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C267EB28EB326C00DD5677 /* Simple+Ex.swift */; };
 		91C267EE28EB33A800DD5677 /* Preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 91C267ED28EB33A800DD5677 /* Preference.json */; };
 /* End PBXBuildFile section */
@@ -119,6 +120,7 @@
 		8CF21CC1292384580005FE4E /* Home.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Home.json; sourceTree = "<group>"; };
 		8CF21CC3292384710005FE4E /* HomeViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewReactor.swift; sourceTree = "<group>"; };
 		8CF21CC52923847F0005FE4E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		915251EE292B492800A9C608 /* HomeViewController+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Share.swift"; sourceTree = "<group>"; };
 		91C267EB28EB326C00DD5677 /* Simple+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simple+Ex.swift"; sourceTree = "<group>"; };
 		91C267ED28EB33A800DD5677 /* Preference.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Preference.json; sourceTree = "<group>"; };
 		9D4AEF94CB1BFC4DD1BB3EB8 /* Pods_IOSExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IOSExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -311,6 +313,7 @@
 				8CF21CC1292384580005FE4E /* Home.json */,
 				8CF21CC3292384710005FE4E /* HomeViewReactor.swift */,
 				8CF21CC52923847F0005FE4E /* HomeViewController.swift */,
+				915251EE292B492800A9C608 /* HomeViewController+Share.swift */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				8C9A45BC2887F6F30041937A /* Runtime+Ex.swift in Sources */,
 				8C9A45622887E6070041937A /* R.generated.swift in Sources */,
 				8C9A45BD2887F6F30041937A /* ScrollViewController+Ex.swift in Sources */,
+				915251EF292B492800A9C608 /* HomeViewController+Share.swift in Sources */,
 				8C9A45B82887F6F30041937A /* Storable+Ex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
