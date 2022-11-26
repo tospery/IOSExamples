@@ -57,7 +57,7 @@
 		8CF21CC62923847F0005FE4E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF21CC52923847F0005FE4E /* HomeViewController.swift */; };
 		915251EF292B492800A9C608 /* HomeViewController+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915251EE292B492800A9C608 /* HomeViewController+Share.swift */; };
 		91C267EC28EB326C00DD5677 /* Simple+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C267EB28EB326C00DD5677 /* Simple+Ex.swift */; };
-		91C267EE28EB33A800DD5677 /* Preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 91C267ED28EB33A800DD5677 /* Preference.json */; };
+		91C267EE28EB33A800DD5677 /* Configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = 91C267ED28EB33A800DD5677 /* Configuration.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,7 +122,7 @@
 		8CF21CC52923847F0005FE4E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		915251EE292B492800A9C608 /* HomeViewController+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Share.swift"; sourceTree = "<group>"; };
 		91C267EB28EB326C00DD5677 /* Simple+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simple+Ex.swift"; sourceTree = "<group>"; };
-		91C267ED28EB33A800DD5677 /* Preference.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Preference.json; sourceTree = "<group>"; };
+		91C267ED28EB33A800DD5677 /* Configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
 		9D4AEF94CB1BFC4DD1BB3EB8 /* Pods_IOSExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IOSExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18589FA40C38D0C3B33B15F /* Pods-HiTemplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiTemplate.debug.xcconfig"; path = "Target Support Files/Pods-HiTemplate/Pods-HiTemplate.debug.xcconfig"; sourceTree = "<group>"; };
 		CDF43FBDA0A19283DCD075F2 /* Pods-HiTemplate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiTemplate.release.xcconfig"; path = "Target Support Files/Pods-HiTemplate/Pods-HiTemplate.release.xcconfig"; sourceTree = "<group>"; };
@@ -329,7 +329,7 @@
 		8C9A45AF2887F6F30041937A /* json */ = {
 			isa = PBXGroup;
 			children = (
-				91C267ED28EB33A800DD5677 /* Preference.json */,
+				91C267ED28EB33A800DD5677 /* Configuration.json */,
 			);
 			path = json;
 			sourceTree = "<group>";
@@ -421,7 +421,7 @@
 				8C9A455D2887E3870041937A /* Localizable.strings in Resources */,
 				8CF21CC2292384580005FE4E /* Home.json in Resources */,
 				8C5A3FD52887A0E30009A00F /* Assets.xcassets in Resources */,
-				91C267EE28EB33A800DD5677 /* Preference.json in Resources */,
+				91C267EE28EB33A800DD5677 /* Configuration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
