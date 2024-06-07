@@ -16,88 +16,88 @@ private let readMe = """
 
 @Reducer
 struct LongLivingEffects {
-  @ObservableState
-  struct State: Equatable {
-    var screenshotCount = 0
-  }
-
-  enum Action {
-    case task
-    case userDidTakeScreenshotNotification
-  }
-
-  @Dependency(\.screenshots) var screenshots
-
-  var body: some Reducer<State, Action> {
-    Reduce { state, action in
-      switch action {
-      case .task:
-        // When the view appears, start the effect that emits when screenshots are taken.
-        return .run { send in
-          for await _ in await self.screenshots() {
-            await send(.userDidTakeScreenshotNotification)
-          }
-        }
-
-      case .userDidTakeScreenshotNotification:
-        state.screenshotCount += 1
-        return .none
-      }
+    @ObservableState
+    struct State: Equatable {
+        var screenshotCount = 0
     }
-  }
+    
+    enum Action {
+        case task
+        case userDidTakeScreenshotNotification
+    }
+    
+    @Dependency(\.screenshots) var screenshots
+    
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case .task:
+                // When the view appears, start the effect that emits when screenshots are taken.
+                return .run { send in
+                    for await _ in await self.screenshots() {
+                        await send(.userDidTakeScreenshotNotification)
+                    }
+                }
+                
+            case .userDidTakeScreenshotNotification:
+                state.screenshotCount += 1
+                return .none
+            }
+        }
+    }
 }
 
 extension DependencyValues {
-  var screenshots: @Sendable () async -> AsyncStream<Void> {
-    get { self[ScreenshotsKey.self] }
-    set { self[ScreenshotsKey.self] = newValue }
-  }
+    var screenshots: @Sendable () async -> AsyncStream<Void> {
+        get { self[ScreenshotsKey.self] }
+        set { self[ScreenshotsKey.self] = newValue }
+    }
 }
 
 private enum ScreenshotsKey: DependencyKey {
-  static let liveValue: @Sendable () async -> AsyncStream<Void> = {
-    await AsyncStream(
-      NotificationCenter.default
-        .notifications(named: UIApplication.userDidTakeScreenshotNotification)
-        .map { _ in }
-    )
-  }
+    static let liveValue: @Sendable () async -> AsyncStream<Void> = {
+        await AsyncStream(
+            NotificationCenter.default
+                .notifications(named: UIApplication.userDidTakeScreenshotNotification)
+                .map { _ in }
+        )
+    }
 }
 
 struct LongLivingEffectsView: View {
-  let store: StoreOf<LongLivingEffects>
-
-  var body: some View {
-    Form {
-      Section {
-        AboutView(readMe: readMe)
-      }
-
-      Text("A screenshot of this screen has been taken \(store.screenshotCount) times.")
-        .font(.headline)
-
-      Section {
-        NavigationLink {
-          detailView
-        } label: {
-          Text("Navigate to another screen")
+    let store: StoreOf<LongLivingEffects>
+    
+    var body: some View {
+        Form {
+            Section {
+                AboutView(readMe: readMe)
+            }
+            
+            Text("A screenshot of this screen has been taken \(store.screenshotCount) times.")
+                .font(.headline)
+            
+            Section {
+                NavigationLink {
+                    detailView
+                } label: {
+                    Text("Navigate to another screen")
+                }
+            }
         }
-      }
+        .navigationTitle("Long-living effects")
+        .task { await store.send(.task).finish() }
     }
-    .navigationTitle("Long-living effects")
-    .task { await store.send(.task).finish() }
-  }
-
-  var detailView: some View {
-    Text(
+    
+    var detailView: some View {
+        Text(
       """
       Take a screenshot of this screen a few times, and then go back to the previous screen to see \
       that those screenshots were not counted.
       """
-    )
-    .padding(.horizontal, 64)
-    .navigationBarTitleDisplayMode(.inline)
-  }
+        )
+        .padding(.horizontal, 64)
+        .navigationBarTitleDisplayMode(.inline)
+    }
 }
 
 #Preview {

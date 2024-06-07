@@ -52,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		914C97FD2C12B9E0007CC86B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		91EA30592C0B3590009E361A /* SwiftUICaseStudies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUICaseStudies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91EA305C2C0B3590009E361A /* SwiftUICaseStudiesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICaseStudiesApp.swift; sourceTree = "<group>"; };
 		91EA30602C0B3591009E361A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		91EA305B2C0B3590009E361A /* SwiftUICaseStudies */ = {
 			isa = PBXGroup;
 			children = (
+				914C97FD2C12B9E0007CC86B /* Info.plist */,
 				91EA30822C0B3657009E361A /* 00-RootView.swift */,
 				91EA308F2C0B3657009E361A /* 01-GettingStarted-AlertsAndConfirmationDialogs.swift */,
 				91EA30912C0B3657009E361A /* 01-GettingStarted-Animations.swift */,
@@ -447,6 +449,7 @@
 				DEVELOPMENT_TEAM = WDE622528T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftUICaseStudies/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -476,6 +479,7 @@
 				DEVELOPMENT_TEAM = WDE622528T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftUICaseStudies/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

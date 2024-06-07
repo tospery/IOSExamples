@@ -16,193 +16,193 @@ private let readMe = """
 
 @Reducer
 struct SharedStateInMemory {
-  enum Tab { case counter, profile }
-
-  @ObservableState
-  struct State: Equatable {
-    var currentTab = Tab.counter
-    var counter = CounterTab.State()
-    var profile = ProfileTab.State()
-  }
-
-  enum Action {
-    case counter(CounterTab.Action)
-    case profile(ProfileTab.Action)
-    case selectTab(Tab)
-  }
-
-  var body: some Reducer<State, Action> {
-    Scope(state: \.counter, action: \.counter) {
-      CounterTab()
+    enum Tab { case counter, profile }
+    
+    @ObservableState
+    struct State: Equatable {
+        var currentTab = Tab.counter
+        var counter = CounterTab.State()
+        var profile = ProfileTab.State()
     }
-
-    Scope(state: \.profile, action: \.profile) {
-      ProfileTab()
+    
+    enum Action {
+        case counter(CounterTab.Action)
+        case profile(ProfileTab.Action)
+        case selectTab(Tab)
     }
-
-    Reduce { state, action in
-      switch action {
-      case .counter, .profile:
-        return .none
-      case let .selectTab(tab):
-        state.currentTab = tab
-        return .none
-      }
+    
+    var body: some Reducer<State, Action> {
+        Scope(state: \.counter, action: \.counter) {
+            CounterTab()
+        }
+        
+        Scope(state: \.profile, action: \.profile) {
+            ProfileTab()
+        }
+        
+        Reduce { state, action in
+            switch action {
+            case .counter, .profile:
+                return .none
+            case let .selectTab(tab):
+                state.currentTab = tab
+                return .none
+            }
+        }
     }
-  }
 }
 
 struct SharedStateInMemoryView: View {
-  @Bindable var store: StoreOf<SharedStateInMemory>
-
-  var body: some View {
-    TabView(selection: $store.currentTab.sending(\.selectTab)) {
-      CounterTabView(
-        store: store.scope(state: \.counter, action: \.counter)
-      )
-      .tag(SharedStateInMemory.Tab.counter)
-      .tabItem { Text("Counter") }
-
-      ProfileTabView(
-        store: store.scope(state: \.profile, action: \.profile)
-      )
-      .tag(SharedStateInMemory.Tab.profile)
-      .tabItem { Text("Profile") }
+    @Bindable var store: StoreOf<SharedStateInMemory>
+    
+    var body: some View {
+        TabView(selection: $store.currentTab.sending(\.selectTab)) {
+            CounterTabView(
+                store: store.scope(state: \.counter, action: \.counter)
+            )
+            .tag(SharedStateInMemory.Tab.counter)
+            .tabItem { Text("Counter") }
+            
+            ProfileTabView(
+                store: store.scope(state: \.profile, action: \.profile)
+            )
+            .tag(SharedStateInMemory.Tab.profile)
+            .tabItem { Text("Profile") }
+        }
+        .navigationTitle("Shared State Demo")
     }
-    .navigationTitle("Shared State Demo")
-  }
 }
 
 extension SharedStateInMemory {
-  @Reducer
-  struct CounterTab {
-    @ObservableState
-    struct State: Equatable {
-      @Presents var alert: AlertState<Action.Alert>?
-      @Shared(.stats) var stats = Stats()
-    }
-
-    enum Action {
-      case alert(PresentationAction<Alert>)
-      case decrementButtonTapped
-      case incrementButtonTapped
-      case isPrimeButtonTapped
-
-      enum Alert: Equatable {}
-    }
-
-    var body: some Reducer<State, Action> {
-      Reduce { state, action in
-        switch action {
-        case .alert:
-          return .none
-
-        case .decrementButtonTapped:
-          state.stats.decrement()
-          return .none
-
-        case .incrementButtonTapped:
-          state.stats.increment()
-          return .none
-
-        case .isPrimeButtonTapped:
-          state.alert = AlertState {
-            TextState(
-              isPrime(state.stats.count)
-                ? "👍 The number \(state.stats.count) is prime!"
-                : "👎 The number \(state.stats.count) is not prime :("
-            )
-          }
-          return .none
+    @Reducer
+    struct CounterTab {
+        @ObservableState
+        struct State: Equatable {
+            @Presents var alert: AlertState<Action.Alert>?
+            @Shared(.stats) var stats = Stats()
         }
-      }
-      .ifLet(\.$alert, action: \.alert)
-    }
-  }
-
-  @Reducer
-  struct ProfileTab {
-    @ObservableState
-    struct State: Equatable {
-      @Shared(.stats) var stats = Stats()
-    }
-
-    enum Action {
-      case resetStatsButtonTapped
-    }
-
-    var body: some Reducer<State, Action> {
-      Reduce { state, action in
-        switch action {
-        case .resetStatsButtonTapped:
-          state.stats = Stats()
-          return .none
+        
+        enum Action {
+            case alert(PresentationAction<Alert>)
+            case decrementButtonTapped
+            case incrementButtonTapped
+            case isPrimeButtonTapped
+            
+            enum Alert: Equatable {}
         }
-      }
+        
+        var body: some Reducer<State, Action> {
+            Reduce { state, action in
+                switch action {
+                case .alert:
+                    return .none
+                    
+                case .decrementButtonTapped:
+                    state.stats.decrement()
+                    return .none
+                    
+                case .incrementButtonTapped:
+                    state.stats.increment()
+                    return .none
+                    
+                case .isPrimeButtonTapped:
+                    state.alert = AlertState {
+                        TextState(
+                            isPrime(state.stats.count)
+                            ? "👍 The number \(state.stats.count) is prime!"
+                            : "👎 The number \(state.stats.count) is not prime :("
+                        )
+                    }
+                    return .none
+                }
+            }
+            .ifLet(\.$alert, action: \.alert)
+        }
     }
-  }
+    
+    @Reducer
+    struct ProfileTab {
+        @ObservableState
+        struct State: Equatable {
+            @Shared(.stats) var stats = Stats()
+        }
+        
+        enum Action {
+            case resetStatsButtonTapped
+        }
+        
+        var body: some Reducer<State, Action> {
+            Reduce { state, action in
+                switch action {
+                case .resetStatsButtonTapped:
+                    state.stats = Stats()
+                    return .none
+                }
+            }
+        }
+    }
 }
 
 private struct CounterTabView: View {
-  @Bindable var store: StoreOf<SharedStateInMemory.CounterTab>
-
-  var body: some View {
-    Form {
-      Text(template: readMe, .caption)
-
-      VStack(spacing: 16) {
-        HStack {
-          Button {
-            store.send(.decrementButtonTapped)
-          } label: {
-            Image(systemName: "minus")
-          }
-
-          Text("\(store.stats.count)")
-            .monospacedDigit()
-
-          Button {
-            store.send(.incrementButtonTapped)
-          } label: {
-            Image(systemName: "plus")
-          }
+    @Bindable var store: StoreOf<SharedStateInMemory.CounterTab>
+    
+    var body: some View {
+        Form {
+            Text(template: readMe, .caption)
+            
+            VStack(spacing: 16) {
+                HStack {
+                    Button {
+                        store.send(.decrementButtonTapped)
+                    } label: {
+                        Image(systemName: "minus")
+                    }
+                    
+                    Text("\(store.stats.count)")
+                        .monospacedDigit()
+                    
+                    Button {
+                        store.send(.incrementButtonTapped)
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+                
+                Button("Is this prime?") { store.send(.isPrimeButtonTapped) }
+            }
         }
-
-        Button("Is this prime?") { store.send(.isPrimeButtonTapped) }
-      }
+        .buttonStyle(.borderless)
+        .alert($store.scope(state: \.alert, action: \.alert))
     }
-    .buttonStyle(.borderless)
-    .alert($store.scope(state: \.alert, action: \.alert))
-  }
 }
 
 private struct ProfileTabView: View {
-  let store: StoreOf<SharedStateInMemory.ProfileTab>
-
-  var body: some View {
-    Form {
-      Text(
-        template: """
+    let store: StoreOf<SharedStateInMemory.ProfileTab>
+    
+    var body: some View {
+        Form {
+            Text(
+                template: """
           This tab shows state from the previous tab, and it is capable of resetting all of the \
           state back to 0.
-
+          
           This shows that it is possible for each screen to model its state in the way that makes \
           the most sense for it, while still allowing the state and mutations to be shared \
           across independent screens.
           """,
-        .caption
-      )
-
-      VStack(spacing: 16) {
-        Text("Current count: \(store.stats.count)")
-        Text("Max count: \(store.stats.maxCount)")
-        Text("Min count: \(store.stats.minCount)")
-        Text("Total number of count events: \(store.stats.numberOfCounts)")
-        Button("Reset") { store.send(.resetStatsButtonTapped) }
-      }
+                .caption
+            )
+            
+            VStack(spacing: 16) {
+                Text("Current count: \(store.stats.count)")
+                Text("Max count: \(store.stats.maxCount)")
+                Text("Min count: \(store.stats.minCount)")
+                Text("Total number of count events: \(store.stats.numberOfCounts)")
+                Button("Reset") { store.send(.resetStatsButtonTapped) }
+            }
+        }
+        .buttonStyle(.borderless)
     }
-    .buttonStyle(.borderless)
-  }
 }
 
 #Preview {
@@ -212,9 +212,9 @@ private struct ProfileTabView: View {
 }
 
 extension PersistenceReaderKey where Self == InMemoryKey<Stats> {
-  fileprivate static var stats: Self {
-    inMemory("stats")
-  }
+    fileprivate static var stats: Self {
+        inMemory("stats")
+    }
 }
 
 /// Checks if a number is prime or not.

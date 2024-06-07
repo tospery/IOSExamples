@@ -14,59 +14,59 @@ private let readMe = """
 
 @Reducer
 struct OptionalBasics {
-  @ObservableState
-  struct State: Equatable {
-    var optionalCounter: Counter.State?
-  }
-
-  enum Action {
-    case optionalCounter(Counter.Action)
-    case toggleCounterButtonTapped
-  }
-
-  var body: some Reducer<State, Action> {
-    Reduce { state, action in
-      switch action {
-      case .toggleCounterButtonTapped:
-        state.optionalCounter =
-          state.optionalCounter == nil
-          ? Counter.State()
-          : nil
-        return .none
-      case .optionalCounter:
-        return .none
-      }
+    @ObservableState
+    struct State: Equatable {
+        var optionalCounter: Counter.State?
     }
-    .ifLet(\.optionalCounter, action: \.optionalCounter) {
-      Counter()
+    
+    enum Action {
+        case optionalCounter(Counter.Action)
+        case toggleCounterButtonTapped
     }
-  }
+    
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case .toggleCounterButtonTapped:
+                state.optionalCounter =
+                state.optionalCounter == nil
+                ? Counter.State()
+                : nil
+                return .none
+            case .optionalCounter:
+                return .none
+            }
+        }
+        .ifLet(\.optionalCounter, action: \.optionalCounter) {
+            Counter()
+        }
+    }
 }
 
 struct OptionalBasicsView: View {
-  let store: StoreOf<OptionalBasics>
-
-  var body: some View {
-    Form {
-      Section {
-        AboutView(readMe: readMe)
-      }
-
-      Button("Toggle counter state") {
-        store.send(.toggleCounterButtonTapped)
-      }
-
-      if let store = store.scope(state: \.optionalCounter, action: \.optionalCounter) {
-        Text(template: "`Counter.State` is non-`nil`")
-        CounterView(store: store)
-          .buttonStyle(.borderless)
-          .frame(maxWidth: .infinity)
-      } else {
-        Text(template: "`Counter.State` is `nil`")
-      }
+    let store: StoreOf<OptionalBasics>
+    
+    var body: some View {
+        Form {
+            Section {
+                AboutView(readMe: readMe)
+            }
+            
+            Button("Toggle counter state") {
+                store.send(.toggleCounterButtonTapped)
+            }
+            
+            if let store = store.scope(state: \.optionalCounter, action: \.optionalCounter) {
+                Text(template: "`Counter.State` is non-`nil`")
+                CounterView(store: store)
+                    .buttonStyle(.borderless)
+                    .frame(maxWidth: .infinity)
+            } else {
+                Text(template: "`Counter.State` is `nil`")
+            }
+        }
+        .navigationTitle("Optional state")
     }
-    .navigationTitle("Optional state")
-  }
 }
 
 #Preview {
